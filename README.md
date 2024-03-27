@@ -16,7 +16,11 @@ Mingyang Ling, Kan Chang, Mengyuan Huang, Hengxin Li, Shuping Dang, and Baoxin L
 >Typically, image super-resolution (SR) methods are applied to the standard RGB (sRGB) images produced by the image signal processing (ISP) pipeline of digital cameras. However, due to error accumulation, low bit depth and the nonlinearity with scene radiance in sRGB images, performing SR on them is sub-optimal. To address this issue, a RAW image SR method called pyramid restoration network (PRNet) is proposed in this paper. Firstly, PRNet takes the low-resolution (LR) RAW image as input, and generates a rough estimation of the SR result in the linear color space. Afterwards, a pyramid refinement (PR) sub-network refines image details in the intermediate SR result and corrects its colors in a divide-and-conquer manner. To learn the appropriate colors for displaying, external guidance is extracted from the LR reference image in the sRGB color space, and then fed to the PR sub-network. To effectively incorporate the external guidance, the cross-layer correction module (CLCM), which fully investigates the long-range interactions between two input features, is introduced in the PR sub-network. Moreover, as different frequency components decomposed from the same image are highly correlated, in the PR sub-network, the refined features from a lower layer are utilized to support the feature refinement in an upper layer. Extensive experiments presented in this paper demonstrate that the proposed method is capable of recovering fine details and small structures in images while producing vivid colors that align with the output of a specific camera ISP pipeline.
 
 ## :book: Model
+The overall structure of the proposed PRNet.
 
+![PRNet](./Figs/PRNet.png)
+
+For more details, please refer to our paper.
 
 ## :wrench: Dependencies
 
@@ -54,17 +58,17 @@ Cd to './PRNet', run the following scripts to test models.
 ```bash
     # Scale 2,4
     #-------------PRNet_x2 
-    python main.py --n_patch_size 256  --dir_dataset ../Dataset/Blind_x2 --pre_train PRNet_x2.pth --b_test_only True
+    python main.py --scale 2 --n_patch_size 256  --dir_dataset ../Dataset/Blind_x2 --pre_train PRNet_x2.pth --b_test_only True
 
     #-------------PRNet_x4 
-    python main.py --n_patch_size 128  --dir_dataset ../Dataset/Blind_x4 --pre_train PRNet_x4.pth --b_test_only True
+    python main.py --scale 4 --n_patch_size 128  --dir_dataset ../Dataset/Blind_x4 --pre_train PRNet_x4.pth --b_test_only True
 
 ```
 If you want to save the output images for each dataset, you need to add `--b_save_results True` to test commands.
 
 ## :heart: Citing Us
 
-If you find our repo useful for your research, please consider citing this paper and our [previous work](https://github.com/Hengxin-Li/TSCNN):
+If you find our repo useful for your research, please consider citing this paper and our previous work [TSCNN](https://github.com/Hengxin-Li/TSCNN):
 
 ```
 @ARTICLE{TSCNN,
